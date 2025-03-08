@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Clean Architecture
 
-## Getting Started
+This project follows a **clean architecture** approach in a Next.js application, ensuring separation of concerns, maintainability, and scalability. The architecture organizes the code into **core, data, domain, and presentation layers**, following best practices for frontend development.
 
-First, run the development server:
+## Project Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+└── Clean-AF
+    ├── app
+    │   ├── globals.css          # Global styles
+    │   ├── layout.tsx           # Main layout component
+    │   └── page.tsx             # Entry page
+    ├── constants
+    │   └── ApiEndpoints.ts      # API endpoints configuration
+    ├── core
+    │   └── Home
+    │       ├── data
+    │       │   ├── datasource
+    │       │   │   └── ImageDataSource.ts      # Handles data fetching
+    │       │   ├── model
+    │       │   │   └── ImageModel.ts          # Defines data model
+    │       │   └── repositories
+    │       │       └── ImageRepositoryImpl.ts # Implements repository pattern
+    │       ├── domain
+    │       │   ├── entity
+    │       │   │   └── Image.ts               # Core entity definition
+    │       │   ├── repositories
+    │       │   │   └── ImageRepository.ts     # Repository interface
+    │       │   └── usecase
+    │       │       └── GetRandomImageUseCase.ts # Business logic for fetching an image
+    │       └── presentation
+    │           ├── di
+    │           │   └── HomeProvider.tsx       # Dependency injection provider
+    │           ├── state
+    │           │   └── homeSlice.ts           # Redux slice for state management
+    │           ├── view
+    │           │   ├── HomePageComponent.tsx  # Home page UI component
+    │           │   └── ImageDialog.tsx        # Dialog component
+    │           └── viewmodel
+    │               └── HomeViewModel.ts       # ViewModel for handling UI logic
+    ├── redux
+    │   ├── store.ts              # Redux store setup
+    │   └── storeProvider.tsx      # Redux provider
+    ├── .gitignore
+    ├── next.config.ts
+    ├── package-lock.json
+    ├── package.json
+    ├── postcss.config.mjs
+    ├── README.md
+    └── tsconfig.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
+- **Separation of concerns**: Organized into data, domain, and presentation layers.
+- **Redux integration**: State management with Redux.
+- **Dependency Injection (DI)**: Implemented for better maintainability.
+- **Scalable architecture**: Follows clean code principles.
+- **TypeScript support**: Ensures type safety and better developer experience.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Getting Started
+### Prerequisites
+- Node.js v16+
+- npm or yarn installed
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Installation
+```sh
+# Clone the repository
+git clone <repo-url>
 
-## Learn More
+# Navigate to the project directory
+cd Clean-AF
 
-To learn more about Next.js, take a look at the following resources:
+# Install dependencies
+npm install  # or yarn install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Running the Application
+```sh
+npm run dev  # or yarn dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The app will be available at `http://localhost:3000`.
